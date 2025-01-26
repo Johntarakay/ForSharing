@@ -13,9 +13,10 @@ public class Client extends Person{
 		this.dailySpending = dailySpending;
 		
 	}
-
+	
+		
 	@Override
-	void displayInfo(String clientName) {
+	 void displayInfo(String clientName) {
 		// TODO Auto-generated method stub
 		Client displayClient=findClientName(clientName);
 		if (displayClient==null) {
@@ -23,7 +24,7 @@ public class Client extends Person{
 			return;
 		}
 		System.out.println("The client "+this.getName()+". From "
-							+this.companyName+" company"+"\n"+dailySpending[30]);
+							+this.companyName+" company"+"\n"+dailySpending[29]+" "+dailySpending[30]);
 		       
 	}
 			
@@ -36,11 +37,34 @@ public class Client extends Person{
 			}
 		}						
 		return found;	
-	}	
+	}
+	
+	void updateDailySpending(int day, double amount) {
+		try {
+		if (day<0 || day>dailySpending.length) {
+			throw new IllegalArgumentException("Invalid day index. Must be between 1 and " + dailySpending.length + ".");
+		}
+		if (amount<0) {
+			throw new IllegalArgumentException("Amount must be positive number");
+		}
+		    dailySpending[day] = amount;
+		} catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("Error: Invalid day index. Please provide a valid index.");
+		}
+		catch (IllegalArgumentException e) {
+		      System.out.println("Validation error: "+e.getMessage());
+		}
+		catch (Exception e) {
+	        System.out.println("Unexpected error occured: "+e.getMessage());
+		}
+		        
+	}
+	
+	public static void addClient(Client client) {
+	        clients.add(client);
+	    }
 	
 	
-	void updateDailySpanding(int day,double amout);
-
 	
 	
 	

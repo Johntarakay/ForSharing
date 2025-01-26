@@ -14,8 +14,8 @@ public abstract class Person {
 	
 	abstract void displayInfo(String name);
 	
-	static void resetAllDays (ArrayList<Worker> workers) {
-	}
+	//static void resetAllDays (ArrayList<Worker> workers) {
+	//}
 
 	public String getName() {
 		return name;
