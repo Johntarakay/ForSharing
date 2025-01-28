@@ -30,8 +30,6 @@ public abstract class Worker extends Person {
 		setVacationDays(START_VACATION_DAYS); 		
 	}
 	
-	
-	
 	void logHours(int day, double hours) {
 		try {
 			if (day<0 || day>=dailyHours.length) {

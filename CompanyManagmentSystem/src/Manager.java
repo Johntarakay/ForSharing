@@ -74,7 +74,7 @@ public class Manager extends Worker{
 	}
 
 	@Override
-	public void displayInfo(String name) {
+	public void displayInfo() {
 		// TODO Auto-generated method stub
 		
 	}

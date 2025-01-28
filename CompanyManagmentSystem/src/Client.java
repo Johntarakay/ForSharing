@@ -16,13 +16,10 @@ public class Client extends Person{
 		
 	}
 	
-	
 		
 	public String getCompanyName() {
 		return companyName;
 	}
-
-
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
@@ -41,7 +38,6 @@ public class Client extends Person{
 	}
 
 
-
 	public static ArrayList<Client> getClients() {
 		return clients;
 	}
@@ -52,16 +48,17 @@ public class Client extends Person{
 		Client.clients = clients;
 	}
 
-
-
 	@Override
-	 void displayInfo() {
+	 public void displayInfo() {
 		// TODO Auto-generated method stub
-		for (Client client : clients) {
-		System.out.println("The client "+this.getName()+". From "
-							+this.companyName+" company"+"\n"+dailySpending[28]+" "+dailySpending[29]);
+		StringBuilder str = new StringBuilder("The client "+getName()+". His ID: "+getId()+".\nFrom "
+				+getCompanyName()+" company."+"\nDaily spending:\n");
+		for (int i = 0; i < dailySpending.length; i++) {
+			str.append("Day " + (i + 1) + ": " + String.format("%.0f", dailySpending[i])+". ");
 		}
-		       
+				
+				str.append('\n');
+				System.out.println(str);
 	}
 	
 	 void InfoClient(String clientName) {
@@ -72,7 +69,8 @@ public class Client extends Person{
 			return;
 		}
 		System.out.println("The client "+this.getName()+". From "
-							+this.companyName+" company"+"\n"+dailySpending[28]+" "+dailySpending[29]);
+							+this.companyName+" company"+"\n"+dailySpending[28]
+							+" "+dailySpending[29]);
 		       
 	}
 			
