@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Worker extends Person {
 
@@ -18,7 +19,7 @@ public abstract class Worker extends Person {
 
 		
 	@Override
-	public abstract void displayInfo(String name); 
+	public abstract void displayInfo(); 
 	
 	public int getDefaultVacationDays() {
 		
@@ -41,7 +42,7 @@ public abstract class Worker extends Person {
 			}
 			    dailyHours[day] = hours;
 			} catch (ArrayIndexOutOfBoundsException e) {
-	        System.out.println("Error: Invalid day index. Please provide a valid index.");
+	        System.err.println("Error: Invalid day index. Please provide a valid index.");
 			}
 			catch (IllegalArgumentException e) {
 			      System.err.println("Validation error: "+e.getMessage());
@@ -50,6 +51,13 @@ public abstract class Worker extends Person {
 		        System.err.println("Unexpected error occured: "+e.getMessage());
 			}
 			        
+		}
+	
+	void populateHours() {
+		for (int i=0; i<dailyHours.length; i++) {
+			Random random = new Random();
+			dailyHours[i] = 8+random.nextDouble()*(24-8);
+			}
 		}
 	
 	void resetHours(int day1) {
@@ -66,6 +74,13 @@ public abstract class Worker extends Person {
 		}
 		
 	}
+	
+	void resetAllHours() {
+		for (int i=0; i<dailyHours.length; i++) {
+			logHours(i,0);
+			}
+		}
+	
 	
 	boolean takeVacationDays(int days) {
 		if(this.vacationDays>0) {

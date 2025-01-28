@@ -4,12 +4,14 @@ public class RegularWorker extends Worker {
 
 	private final static int START_SICK_DAYS = 15;
 	private int sickDays;
-	private static ArrayList<Worker> workers = new ArrayList<Worker>();
+	private static ArrayList<RegularWorker> workers = new ArrayList<RegularWorker>();
 	
-	public RegularWorker(String name, double basicSalary, int vacationDays, int sickDays, double[] dailyHours) {
+	public RegularWorker(String name, double basicSalary) {
 		super(name, basicSalary);
 		this.sickDays = START_SICK_DAYS;
-		setDailyHours(dailyHours);
+		populateHours();
+		getStartVacationDays();
+		workers.add(this);
 	}
 
 	@Override
@@ -50,20 +52,55 @@ public class RegularWorker extends Worker {
     }
 	
 	boolean takeSickDays(int days) {
-		if(this.sickDays>0) {
-			return true;
-		} else {
-			System.out.println("There's no sick days left.");
+		if(days>START_SICK_DAYS) {
+			System.err.println("There's not enough sickdays left for "+getName());
+			return false;
+		} 
+		if (days<0) {
+			System.out.println("Number of sickdays must be positive");
 			return false;
 		}
+		if (sickDays-days<0) {
+			System.err.println("There's not enough sickdays left for "+getName());
+			return false;
+		}
+		sickDays-=days;
+		return true;
 	}
+	
+	
+	
+	public static ArrayList<RegularWorker> getWorkers() {
+		return workers;
+	}
+
+	public static void setWorkers(ArrayList<RegularWorker> workers) {
+		RegularWorker.workers = workers;
+	}
+
+	public int getSickDays() {
+		return sickDays;
+	}
+
+	public void setSickDays(int sickDays) {
+		this.sickDays = sickDays;
+	}
+
 	
 	@Override
-	
-	public void displayInfo(String name) {
-		// TODO Auto-generated method stub
-		
+	public void displayInfo() {
+	    // TODO Auto-generated method stub
+	    for (RegularWorker regularWorker : workers) {
+	        double[] dailyHours = regularWorker.getDailyHours();
+	        System.out.println("The worker " + regularWorker.getName() + ". His ID: " + this.getId() + 
+	                           ". His statistics of working hours are:");
+	        for (int i = 0; i < dailyHours.length; i++) {
+	            String formattedHour = String.format("%.1f", dailyHours[i]);
+	            System.out.println("Day " + (i + 1) + ": " + formattedHour);
+	        }
+	    }
 	}
+
 
 	@Override
 	public void resetAllDays(ArrayList<Worker> workers) {

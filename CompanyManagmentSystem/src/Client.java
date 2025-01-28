@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Client extends Person{
 	
@@ -7,16 +8,63 @@ public class Client extends Person{
 	static ArrayList<Client> clients = new ArrayList<Client>();
 	
 	
-	public Client(String name, String companyName, double[] dailySpending) {
+	public Client(String name, String companyName) {
 		super(name);
 		this.companyName = companyName;
-		this.dailySpending = dailySpending;
+		populateSpending();
+		clients.add(this);
 		
 	}
 	
+	
 		
+	public String getCompanyName() {
+		return companyName;
+	}
+
+
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+
+
+	public double[] getDailySpending() {
+		return dailySpending;
+	}
+
+
+
+	public void setDailySpending(double[] dailySpending) {
+		this.dailySpending = dailySpending;
+	}
+
+
+
+	public static ArrayList<Client> getClients() {
+		return clients;
+	}
+
+
+
+	public static void setClients(ArrayList<Client> clients) {
+		Client.clients = clients;
+	}
+
+
+
 	@Override
-	 void displayInfo(String clientName) {
+	 void displayInfo() {
+		// TODO Auto-generated method stub
+		for (Client client : clients) {
+		System.out.println("The client "+this.getName()+". From "
+							+this.companyName+" company"+"\n"+dailySpending[28]+" "+dailySpending[29]);
+		}
+		       
+	}
+	
+	 void InfoClient(String clientName) {
 		// TODO Auto-generated method stub
 		Client displayClient=findClientName(clientName);
 		if (displayClient==null) {
@@ -24,7 +72,7 @@ public class Client extends Person{
 			return;
 		}
 		System.out.println("The client "+this.getName()+". From "
-							+this.companyName+" company"+"\n"+dailySpending[29]+" "+dailySpending[30]);
+							+this.companyName+" company"+"\n"+dailySpending[28]+" "+dailySpending[29]);
 		       
 	}
 			
@@ -58,6 +106,13 @@ public class Client extends Person{
 	        System.out.println("Unexpected error occured: "+e.getMessage());
 		}
 		        
+	}
+	
+	void populateSpending() {
+		for (int i=0; i<dailySpending.length; i++) {
+			Random random = new Random();
+			dailySpending[i] = random.nextDouble()*1000;
+			}
 	}
 	
 	public static void addClient(Client client) {

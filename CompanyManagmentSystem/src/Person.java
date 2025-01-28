@@ -14,7 +14,7 @@ public abstract class Person {
 				+ idCounter++;
 	}
 	
-	abstract void displayInfo(String name);
+	abstract void displayInfo();
 	
 	//static void resetAllDays (ArrayList<Worker> workers) {
 	//}
