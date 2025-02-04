@@ -22,23 +22,22 @@ public abstract class Worker extends Person {
 	public abstract void displayInfo(); 
 	
 	public int getDefaultVacationDays() {
-		
 		return START_VACATION_DAYS;
 	}
 	
-	protected void resetAllDays(ArrayList<Worker> workers) {
+	public void resetAllDays() {
 		setVacationDays(START_VACATION_DAYS); 		
 	}
 	
-	void logHours(int day, double hours) {
+	/**
+	 * Method allows to log working hours per any day. 
+	 * @param day
+	 * @param hours
+	 */
+	
+	public void logHours(int day, double hours) {
 		try {
-			if (day<0 || day>=dailyHours.length) {
-				throw new IllegalArgumentException("Invalid day index. Must be between 1 and " + dailyHours.length + ".");
-			}
-			if (hours<0 || hours>24) {
-				throw new IllegalArgumentException("Hours must be a positive number, but not bigger then 24");
-			}
-			    dailyHours[day] = hours;
+			  dailyHours[day] = hours;
 			} catch (ArrayIndexOutOfBoundsException e) {
 	        System.err.println("Error: Invalid day index. Please provide a valid index.");
 			}
@@ -51,44 +50,25 @@ public abstract class Worker extends Person {
 			        
 		}
 	
-	void populateHours() {
+	/**
+	 * Method automatically fills an array dailyHours(day and hours per day).
+	 */
+	public void populateHours() {
 		for (int i=0; i<dailyHours.length; i++) {
 			Random random = new Random();
 			dailyHours[i] = 8+random.nextDouble()*(24-8);
 			}
 		}
 	
-	void resetHours(int day1) {
-		try{
-			if (day1<0||day1>dailyHours.length) {
-				throw new IllegalArgumentException("Input can't be less then zero or bigger then 30");
-			}
-				
-			logHours(day1,0);
-		}catch(IllegalArgumentException e) {
-			System.err.println("Error: Invalid day index. Please provide a valid index.");
-		}catch (Exception e) {
-	        System.err.println("Unexpected error occured: "+e.getMessage());
-		}
-		
-	}
-	
+	/**
+	 * Method take to 0 all days in array. 
+	 */
 	void resetAllHours() {
 		for (int i=0; i<dailyHours.length; i++) {
 			logHours(i,0);
 			}
 		}
 	
-	
-	boolean takeVacationDays(int days) {
-		if(this.vacationDays>0) {
-			return true;
-		} else {
-			System.err.println("There's no vacation days left.");
-			return false;
-		}
-	}
-
 	public double[] getDailyHours() {
 		return dailyHours;
 	}
